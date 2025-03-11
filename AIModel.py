@@ -14,3 +14,14 @@ OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 #Bot Command Specifications:
+intents = discord.Intents.default()
+bot = commands.Bot(command_prefix="!Jan", intents=intents)
+
+#The approach of checking is either by a keyword, or question to AI model.
+#Jan AI Model should be specific to YGO Content only:
+YGO_KEYWORDS = ["yugioh", "card", "duel", "banlist", "deck", 
+                "summon", "trap", "yugioh", "يوغي يو", "أوراق يوغي"]
+
+#Check if Question is related to YuGiOh:
+def is_ygo_related(question):
+    return any(keyword in question.lower() for keyword in YGO_KEYWORDS)
